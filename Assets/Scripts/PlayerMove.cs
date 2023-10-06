@@ -10,6 +10,9 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    public GameObject scanObject;
+    int direction;
+    float detect_range = 1.5f;
 
 
     void Awake()
@@ -25,8 +28,16 @@ public class PlayerMove : MonoBehaviour
         // 점프
         if (Input.GetButtonDown("Jump") && !anim.GetBool("isJumping"))
         {
-            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            anim.SetBool("isJumping", true);
+            if (scanObject != null) //조사할게 있으면 이름출력(점프는 안됨)
+            {
+                gameManager.Action(scanObject);
+                //Debug.Log(scanObject.name);
+            }
+            else
+            { //아니면 점프
+                rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                anim.SetBool("isJumping", true);
+            }
 
         }
 
@@ -38,8 +49,21 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 방향 전환
-        if(Input.GetButton("Horizontal"))
-            spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+        if (gameManager.isAction == false && Input.GetButton("Horizontal"))
+        {
+            if (Input.GetAxisRaw("Horizontal") == -1)
+            {
+                spriteRenderer.flipX = true;
+                direction = -1;
+                //Debug.Log(direction);
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+                direction = 1;
+                //Debug.Log(direction);
+            }
+        }
 
         // 걷는 애니메이션 전환
         if (Mathf.Abs(rigid.velocity.x) < 0.5)
@@ -48,10 +72,11 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isWalking", true);
     }
 
+
     void FixedUpdate()
     {
         // 움직임 스피드
-        float h = Input.GetAxisRaw("Horizontal");
+        float h = gameManager.isAction ? 0 : Input.GetAxisRaw("Horizontal");
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
         // 최대 속도
@@ -70,6 +95,24 @@ public class PlayerMove : MonoBehaviour
                 if (rayhit.distance < 0.5f)
                     anim.SetBool("isJumping", false);
             }
+        }
+
+        //조사액션
+        Debug.DrawRay(rigid.position, new Vector3(direction * detect_range, 0, 0), new Color(0, 0, 1));
+
+        //Layer가 Object인 물체만 rayHit_detect에 감지 
+        RaycastHit2D rayHit_detect = Physics2D.Raycast(rigid.position, new Vector3(direction, 0, 0), detect_range, LayerMask.GetMask("Object"));
+
+        //감지되면 scanObject에 오브젝트 저장 
+        if (rayHit_detect.collider != null)
+        {
+            scanObject = rayHit_detect.collider.gameObject;
+            //Debug.Log(scanObject.name);
+
+        }
+        else
+        {
+            scanObject = null;
         }
     }
 
