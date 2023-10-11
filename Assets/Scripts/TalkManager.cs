@@ -24,8 +24,8 @@ public class TalkManager : MonoBehaviour
 
         //Quest Talk
         talkData.Add(10 + 1000, new string[] { "어서 와.:0",
-                                               "이 마을에 놀라운 전설이 있다는데:1",
-                                               "오른쪽 호수 쪽에 루나가 알려줄거야.:0"});
+                                               "졸업 과제때문에 왔지 오늘 졸업 과제를 알려줄거야:1",
+                                               "졸업 과제는 지나다니는 몬스터를 잡아줘:0"});
         talkData.Add(11 + 1000, new string[] {"아직 못 만났어?:0",
                                               "루나는 오른 쪽 호수 쪽에 있어.:1"});
         talkData.Add(11 + 2000, new string[] { "안녕.:0",
