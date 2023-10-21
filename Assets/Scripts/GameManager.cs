@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     public Image portraitImg;
 
     public QuestManager questManager;
+    public TextMeshProUGUI name;
+    public GameObject menuSet;
 
     public void Action(GameObject scanObj)
     {
@@ -38,7 +41,19 @@ public class GameManager : MonoBehaviour
         //퀘스트 이름 출력
         //Debug.Log(questManager.CheckQuest());
     }
+    void Update()
+    {
+        //submenu
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (menuSet.activeSelf)
+                menuSet.SetActive(false);
+            else
+                menuSet.SetActive(true);
 
+        }
+
+    }
     void Talk(int id, bool isNpc)
     {
         int questTalkIndex = questManager.GetQuestTalkIndex(id);
@@ -98,5 +113,10 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = new Vector3(0, 0, 0);
         player.VelocityZero();
+    }
+
+    public void title()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }
