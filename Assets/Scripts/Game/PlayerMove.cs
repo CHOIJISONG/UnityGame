@@ -1,19 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     public GameManager gameManager;
+    public static PlayerMove instance;
+    public PlayerMove player;
+
+    public GameObject scanObject;
+    int direction;
+    float detect_range = 1.5f;
+
     public float maxSpeed;
     public float jumpPower;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
-    public GameObject scanObject;
-    int direction;
-    float detect_range = 1.5f;
 
+    public event Action onEncountered;
 
     void Awake()
     {
@@ -23,7 +31,7 @@ public class PlayerMove : MonoBehaviour
     }
 
 
-    void Update()
+    public void HandleUpdate()
     {
         // 점프
         if (Input.GetButtonDown("Jump") && !anim.GetBool("isJumping"))
@@ -70,23 +78,19 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isWalking", false);
         else
             anim.SetBool("isWalking", true);
-    }
 
-
-    void FixedUpdate()
-    {
         // 움직임 스피드
         float h = gameManager.isAction ? 0 : Input.GetAxisRaw("Horizontal");
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
         // 최대 속도
-        if(rigid.velocity.x > maxSpeed) //오른쪽 최대 속력
+        if (rigid.velocity.x > maxSpeed) //오른쪽 최대 속력
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
-        else if (rigid.velocity.x < maxSpeed*(-1)) // 왼쪽 최대 속력
-            rigid.velocity = new Vector2(maxSpeed*(-1), rigid.velocity.y);
+        else if (rigid.velocity.x < maxSpeed * (-1)) // 왼쪽 최대 속력
+            rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
 
         //Landing Platform
-        if(rigid.velocity.y < 0)
+        if (rigid.velocity.y < 0)
         {
             Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
             RaycastHit2D rayhit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
@@ -96,6 +100,14 @@ public class PlayerMove : MonoBehaviour
                     anim.SetBool("isJumping", false);
             }
         }
+
+
+    }
+
+
+    void FixedUpdate()
+    {
+        
 
         //조사액션
         Debug.DrawRay(rigid.position, new Vector3(direction * detect_range, 0, 0), new Color(0, 0, 1));
@@ -130,11 +142,14 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy" )
         {
-            onDamaged(collision.transform.position);
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isJumping", false);
+            onEncountered();
+            OnAttack(collision.transform);
         }
     }
 
-    void onDamaged(Vector2 targetPos)
+    /*void onDamaged(Vector2 targetPos)
     {
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
         rigid.AddForce(new Vector2(dirc, 1)*7, ForceMode2D.Impulse);
@@ -142,6 +157,21 @@ public class PlayerMove : MonoBehaviour
         //애니메이션
         anim.SetTrigger("damaged");
 
+    }
+    */
+
+    public void OnAttack(Transform enemy)
+    {
+        Enemy_move enemyMove = enemy.GetComponent<Enemy_move>();
+        enemyMove.OnDamaged();
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isJumping", false);
+        onEncountered();
+        OnAttack(collision.transform);
     }
 
     public void VelocityZero()

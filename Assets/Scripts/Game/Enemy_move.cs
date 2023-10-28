@@ -8,12 +8,14 @@ public class Enemy_move : MonoBehaviour
     Animator anim;
     public int nextMove;
     SpriteRenderer spriteRenderer;
+    BoxCollider2D boxCollider;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
 
         Invoke("Think", 5);
     }
@@ -61,5 +63,16 @@ public class Enemy_move : MonoBehaviour
 
         CancelInvoke();
         Invoke("Think", 2);
+    }
+
+    public void OnDamaged()
+    {
+        boxCollider.enabled = false;
+        Invoke("DeActive", 2);
+    }
+
+    void DeActive()
+    {
+        gameObject.SetActive(false);
     }
 }
