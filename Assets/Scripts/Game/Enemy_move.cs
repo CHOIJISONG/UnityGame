@@ -69,6 +69,7 @@ public class Enemy_move : MonoBehaviour
     {
         boxCollider.enabled = false;
         Invoke("DeActive", 2);
+       
     }
 
     void DeActive()
