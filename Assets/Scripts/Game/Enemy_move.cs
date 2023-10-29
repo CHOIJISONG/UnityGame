@@ -74,5 +74,6 @@ public class Enemy_move : MonoBehaviour
     void DeActive()
     {
         gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Platform
   - Enemy
+  - Finish1
+  - Finish2
+  - Finish3
+  - Finish5
+  - Finish4
   layers:
   - Default
   - TransparentFX

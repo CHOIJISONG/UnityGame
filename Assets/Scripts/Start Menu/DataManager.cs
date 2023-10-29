@@ -4,6 +4,7 @@ using UnityEditor.Experimental.RestService;
 using UnityEngine;
 using System.IO;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 // 저장하는 방법
 // 1. 저장할 데이터가 존재하는가
@@ -18,8 +19,9 @@ using Unity.VisualScripting;
 public class PlayerData
 {
     // 스테이지
-    public string level;
-
+    public string name;
+    public int level;
+    public string sceneName;
 }
 
 public class DataManager : MonoBehaviour
@@ -38,7 +40,8 @@ public class DataManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        } else if (instance != this)
+        }
+        else if (instance != this)
         {
             Destroy(instance.gameObject);
         }
@@ -46,14 +49,18 @@ public class DataManager : MonoBehaviour
         #endregion
 
         path = Application.persistentDataPath + "/save";
+        print(path);
+
+        // 씬이 로드될 때마다 현재 씬 이름 업데이트
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
 
-    void Start()
+    // 씬 로드 시 호출될 이벤트 핸들러
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-       
+        nowPlayer.sceneName = scene.name;
     }
-
     public void SaveData()
     {
         string data = JsonUtility.ToJson(nowPlayer);
@@ -62,7 +69,7 @@ public class DataManager : MonoBehaviour
     public void LoadData()
     {
         string data = File.ReadAllText(path + nowSlot.ToString());
-        JsonUtility.FromJson<PlayerData>(data);
+        nowPlayer = JsonUtility.FromJson<PlayerData>(data);
     }
     public void DataClear()
     {
