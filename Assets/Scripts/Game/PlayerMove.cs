@@ -23,7 +23,13 @@ public class PlayerMove : MonoBehaviour
     Animator anim;
 
     public event Action onEncountered;
-
+    // 몬스터 처치 횟수를 저장할 변수
+    private int monsterKills = 0;
+    void Start()
+    {
+        // 현재 씬에서 몬스터 카운트를 초기화
+        monsterKills = 0;
+    }
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -154,10 +160,27 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy" )
         {
+            // 몬스터를 처치할 때마다 카운트를 증가
+            monsterKills++;
+
             anim.SetBool("isWalking", false);
             anim.SetBool("isJumping", false);
             onEncountered();
             OnAttack(collision.transform);
+            Debug.Log(monsterKills);
+
+            // Finish 오브젝트를 찾아야 합니다.
+            GameObject finishObject = GameObject.FindWithTag("Finish");
+
+            if (finishObject != null)
+            {
+                // Finish 오브젝트를 활성화
+                finishObject.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("Finish2 오브젝트를 찾을 수 없습니다.");
+            }
         }
     }
 
