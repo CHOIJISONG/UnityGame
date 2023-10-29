@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public QuestManager questManager;
     public TextMeshProUGUI name;
     public GameObject menuSet;
+   
+
 
     public void Action(GameObject scanObj)
     {
@@ -86,7 +88,7 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         // 스테이지 변경
-        if(stageIndex < Stages.Length-1) 
+        if (stageIndex < Stages.Length - 1)
         {
             Stages[stageIndex].SetActive(false);
             stageIndex++;
@@ -100,7 +102,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("게임 종료");
             Application.Quit();
         }
-        
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -114,7 +116,10 @@ public class GameManager : MonoBehaviour
         player.transform.position = new Vector3(0, 0, 0);
         player.VelocityZero();
     }
-
+    public void save()
+    {
+        DataManager.instance.SaveData();
+    }
     public void title()
     {
         SceneManager.LoadScene("Main Menu");

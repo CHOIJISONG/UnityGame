@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -131,9 +132,20 @@ public class PlayerMove : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Finish")
+        {   // "SceneController" 스크립트의 인스턴스를 찾아서 가져옴
+            SceneManager.LoadScene("Game 2");
+        }
+        else if (collision.gameObject.tag == "Finish1")
         {
-            //Next Stage
-            gameManager.NextStage();
+            SceneManager.LoadScene("Game 3");
+        }
+        else if (collision.gameObject.tag == "Finish2")
+        {
+            SceneManager.LoadScene("Game 4");
+        }
+        else if (collision.gameObject.tag == "Finish3")
+        {
+            SceneManager.LoadScene("Game 5");
         }
 
     }
