@@ -26,7 +26,11 @@ public class GameManager : MonoBehaviour
     public QuestManager questManager;
     public TextMeshProUGUI name;
     public GameObject menuSet;
-   
+
+    public int monsterKill;
+
+    public GameObject finishObject;
+
 
 
     public void Action(GameObject scanObj)
@@ -42,6 +46,9 @@ public class GameManager : MonoBehaviour
     {
         //퀘스트 이름 출력
         //Debug.Log(questManager.CheckQuest());
+        
+        finishObject.SetActive(false);
+
     }
     void Update()
     {
@@ -54,6 +61,8 @@ public class GameManager : MonoBehaviour
                 menuSet.SetActive(true);
 
         }
+        NextStage();
+
 
     }
     void Talk(int id, bool isNpc)
@@ -87,21 +96,44 @@ public class GameManager : MonoBehaviour
     }
     public void NextStage()
     {
-        // 스테이지 변경
-        if (stageIndex < Stages.Length - 1)
+         //씬별 조건에 따라 오브젝트 활성화
+
+        if (SceneManager.GetActiveScene().name == "Game")
         {
-            Stages[stageIndex].SetActive(false);
-            stageIndex++;
-            Stages[stageIndex].SetActive(true);
-            PlayerReposition();
+
+            if (monsterKill >= 1)
+            {
+
+                finishObject.SetActive(true);
+            }
+            
         }
-        else
+        else if (SceneManager.GetActiveScene().name == "Game 2")
         {
-            // 게임 클리어
-            Time.timeScale = 0;
-            Debug.Log("게임 종료");
-            Application.Quit();
+            if (monsterKill >= 3)
+            {
+
+                finishObject.SetActive(true);
+            }
         }
+        else if (SceneManager.GetActiveScene().name == "Game 3")
+        {
+            if (monsterKill >= 3)
+            {
+
+                finishObject.SetActive(true);
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "Game 4")
+        {
+            if (monsterKill >= 3)
+            {
+
+                finishObject.SetActive(true);
+            }
+        }
+
+
 
     }
 

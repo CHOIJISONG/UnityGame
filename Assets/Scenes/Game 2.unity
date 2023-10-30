@@ -5223,8 +5223,8 @@ Transform:
   m_GameObject: {fileID: 284096364}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 5.138, y: -4.189, z: 0}
+  m_LocalScale: {x: 1.467, y: 0.974, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1054412525}
@@ -16293,6 +16293,8 @@ MonoBehaviour:
   questManager: {fileID: 2075512990}
   name: {fileID: 0}
   menuSet: {fileID: 1797273587}
+  monsterKill: 0
+  finishObject: {fileID: 2096174100}
 --- !u!4 &1353228409
 Transform:
   m_ObjectHideFlags: 0
@@ -26343,7 +26345,7 @@ GameObject:
   - component: {fileID: 2096174102}
   m_Layer: 0
   m_Name: Finish
-  m_TagString: Finish
+  m_TagString: Finish1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26357,7 +26359,7 @@ Transform:
   m_GameObject: {fileID: 2096174100}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.02, y: 8.33, z: 0}
+  m_LocalPosition: {x: 43.39, y: 7.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
