@@ -10,6 +10,9 @@ public class Enemy_move : MonoBehaviour
     SpriteRenderer spriteRenderer;
     BoxCollider2D boxCollider;
 
+    [SerializeField] GameObject exclamation;
+
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -72,9 +75,25 @@ public class Enemy_move : MonoBehaviour
        
     }
 
+    
+
     void DeActive()
     {
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
+
+
+     
+     public IEnumerator TriggerEnemyBattle(PlayerMove player)
+    {
+        exclamation.SetActive(true);
+        yield return new WaitForSeconds(0.3f);
+        exclamation.SetActive(false);
+
+        GameController.Instance.StartEnemyBattle(this);
+        OnDamaged();
+    }
+     
+
 }

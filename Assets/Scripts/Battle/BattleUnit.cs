@@ -7,10 +7,18 @@ using Unity.VisualScripting;
 
 public class BattleUnit : MonoBehaviour
 {
-    [SerializeField] EnemyBase _base;
-    [SerializeField] int level;
 
     [SerializeField] bool isPlayerUnit;
+    [SerializeField] BattleHud hud;
+
+    public BattleHud Hud
+    {
+        get { return hud; }
+    }
+
+    public bool IsPlayerUnit {
+        get { return isPlayerUnit; }
+    }
 
     public Enemy Enemy { get; set; }
 
@@ -26,16 +34,23 @@ public class BattleUnit : MonoBehaviour
         originalColor = image.color;
     }
 
-    public void SetUp()
+    public void SetUp(Enemy enemy)
     {
-        Enemy = new Enemy(_base, level);
+        Enemy = enemy;
         if (isPlayerUnit)
             GetComponent<Image>().sprite = Enemy.Base.FrontSprite;
         else
             GetComponent<Image>().sprite = Enemy.Base.FrontSprite;
 
+        hud.gameObject.SetActive(true);
+        hud.SetData(enemy);
+
         image.color = originalColor;
         PlayEnterAnimation();
+    }
+
+    public void Clear() {
+        hud.gameObject.SetActive(false);
     }
 
     public void PlayEnterAnimation()

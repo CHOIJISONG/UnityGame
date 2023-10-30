@@ -11,6 +11,7 @@ TagManager:
   - Finish3
   - Finish5
   - Finish4
+  - Enemy2
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - playerDamage
   - Button
   - Object
-  - 
+  - FovLayer
   - 
   - 
   - 

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: IceGolem
   description: 
-  frontSprite: {fileID: 0}
+  frontSprite: {fileID: 21300000, guid: d3164e580f81b3940b6dd16959a18e78, type: 3}
   backSprite: {fileID: 0}
   type1: 5
   type2: 2
-  maxHp: 50
+  maxHp: 5
   maxMana: 100
   attack: 1
   defense: 5

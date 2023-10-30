@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,9 +12,15 @@ public class Enemy
     [SerializeField] int level;
 
 
-    public EnemyBase Base { get; set; }
+    public EnemyBase Base
+    {
+        get { return _base; }
+    }
 
-    public int Level { get; set; }
+    public int Level 
+    {
+        get { return level; }
+    }
 
     public int Exp { get; set; }
 
@@ -28,10 +35,9 @@ public class Enemy
     private Transform healthTransform;
     private Vector2 HPScale;
 
-    public Enemy(EnemyBase pBase, int pLevel)
+    public void Init()
     {
-        Base = pBase;
-        Level = pLevel;
+        
         HP = MaxHp;
         Mana = MaxMana;
 
@@ -151,26 +157,36 @@ public class Enemy
     }
 
 
-    public bool SpendMana(Move move, Enemy attacker)
+    public ManaUpdate SpendMana(Move move, Enemy attacker)
     {
-        Mana -= move.Mana;
-        if (attacker.MaxMana > move.Mana)
+        var updateMana = new ManaUpdate()
         {
-            Mana = Mana - move.Mana;
-            return true;
-        }
-        return false;
+            NoMana = false
+        };
 
+        Mana -= move.Mana;
+        if (attacker.Mana <= 0)
+        {
+            Mana = 0;
+            updateMana.NoMana = true;
+        }
+        return updateMana;
     }
 
 
     public Move GetRandomMove()
     {
-        int r = Random.Range(0, Moves.Count);
-        return Moves[r];
+        var movesWithMana = Moves.Where(x => x.Mana > 0).ToList();
+
+        int r = Random.Range(0, movesWithMana.Count);
+        return movesWithMana[r];
     }
 }
 
+public class ManaUpdate
+{
+    public bool NoMana { get; set; }
+}
 
 public class DamageDetails
 {

@@ -55,6 +55,11 @@ public class BattleDialogBox : MonoBehaviour
         }
 
         manaText.text = $"MP : {move.Mana}";
+
+        if (move.Mana == 0)
+            manaText.color = Color.red;
+        else 
+            manaText.color = Color.white;
     }
 
 
