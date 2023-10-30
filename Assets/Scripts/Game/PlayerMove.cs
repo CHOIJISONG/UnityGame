@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     Animator anim;
 
     public event Action onEncountered;
+    public event Action<Collider2D> onEnterEnemysView;
     
 
     void Start()
@@ -107,8 +108,8 @@ public class PlayerMove : MonoBehaviour
                     anim.SetBool("isJumping", false);
             }
         }
-
-
+        
+        OnMoveOver();
     }
 
 
@@ -156,45 +157,55 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*
+     
+     public void OnCollisionEnter2D(Collision2D collision)
     {
+        var collider = collision.collider;
         if (collision.gameObject.tag == "Enemy" )
         {
-            // 몬스터를 처치할 때마다 카운트를 증가
-            
 
+            // 몬스터를 처치할 때마다 카운트를 증가
             anim.SetBool("isWalking", false);
             anim.SetBool("isJumping", false);
             onEncountered();
             OnAttack(collision.transform);
             gameManager.monsterKill += 1;
         }
+        
+       
 
     }
+     
+     */
 
-    /*void onDamaged(Vector2 targetPos)
+
+
+    void OnMoveOver()
     {
-        int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
-        rigid.AddForce(new Vector2(dirc, 1)*7, ForceMode2D.Impulse);
-
-        //애니메이션
-        anim.SetTrigger("damaged");
-
+        CheckIfInEnemyView();
     }
-    */
+
+     
+     private void CheckIfInEnemyView()
+    {
+        var collider = Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.FovLayer);
+
+        if (collider != null)
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isJumping", false);
+            onEnterEnemysView?.Invoke(collider);
+            gameManager.monsterKill += 1;
+        }
+    }
+     
+
 
     public void OnAttack(Transform enemy)
     {
         Enemy_move enemyMove = enemy.GetComponent<Enemy_move>();
         enemyMove.OnDamaged();
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        anim.SetBool("isWalking", false);
-        anim.SetBool("isJumping", false);
-        onEncountered();
-        OnAttack(collision.transform);
     }
 
     public void VelocityZero()

@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BattleState { Start, MoveSelection, EnemyMove, Busy }
+public enum BattleState { Start, MoveSelection, PerformMove/*EnemyMove*/, Busy , BattleOver}
 
 public class BattleSystem : MonoBehaviour
 {
     [SerializeField] BattleUnit playerUnit;
     [SerializeField] BattleUnit enemyUnit;
-    [SerializeField] BattleHud playerHud;
-    [SerializeField] BattleHud enemyHud;
+    /*
+     *     [SerializeField] BattleHud playerHud;
+     *     [SerializeField] BattleHud enemyHud;
+     * 
+     */
     [SerializeField] BattleDialogBox dialogBox;
 
     public event Action<bool> OnBattleOver;
@@ -21,31 +24,69 @@ public class BattleSystem : MonoBehaviour
 
     DamageDetails damageDetails;
 
+    EnemyParty playerParty;
+    EnemyParty enemyParty;
+
     PlayerMove player;
-    Enemy_move enemyT;
+    Enemy_move enemyP;
 
 
-    public void StartBattle()
+    public void StartBattle(EnemyParty playerParty, EnemyParty enemyParty)
     {
-
+        this.playerParty = playerParty;
+        this.enemyParty = enemyParty;
         StartCoroutine(SetUpBattle());
     }
 
+
+     
+    public void StartEnemyBattle(EnemyParty playerParty, EnemyParty enemyParty)
+    {
+        this.playerParty = playerParty;
+        this.enemyParty = enemyParty;
+
+        player = playerParty.GetComponent<PlayerMove>();
+        enemyP = enemyParty.GetComponent<Enemy_move>();
+
+        StartCoroutine(SetUpBattle());
+    }
+     
+
+
     public IEnumerator SetUpBattle()
     {
-        playerUnit.SetUp();
-        enemyUnit.SetUp();
+        playerUnit.Clear();
+        enemyUnit.Clear();
 
-        playerHud.SetData(playerUnit.Enemy);
-        enemyHud.SetData(enemyUnit.Enemy);
+
+        playerUnit.gameObject.SetActive(false);
+        enemyUnit.gameObject.SetActive(false);
+        dialogBox.gameObject.SetActive(false);
+
+        var enemysEnemy = enemyParty.GetEnemy();
+        enemyUnit.SetUp(enemysEnemy);
+        enemyUnit.gameObject.SetActive(true);
+        yield return dialogBox.TypeDialog($"{enemysEnemy.Base.Name} 등장 ");
+        yield return new WaitForSeconds(1f);
+
+        /*--------------------------------------------------------------------*/
+
+        var playerEnemy = playerParty.GetEnemy();
+        playerUnit.SetUp(playerEnemy);
+        playerUnit.gameObject.SetActive(true); 
+        yield return new WaitForSeconds(0.5f);
 
         dialogBox.SetMovesName(playerUnit.Enemy.Moves);
-
-        yield return dialogBox.TypeDialog($"{enemyUnit.Enemy.Base.Name} 등장 ");
-        yield return new WaitForSeconds(0.5f);
+        dialogBox.gameObject.SetActive(true);
 
         MoveSelection();
 
+    }
+
+    void BattleOver(bool won)
+    {
+        state = BattleState.BattleOver;
+        OnBattleOver(won);
     }
 
     void MoveSelection()
@@ -59,88 +100,79 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerMove()
     {
-        state = BattleState.Busy;
+        state = BattleState.PerformMove;
 
         var move = playerUnit.Enemy.Moves[currentMove];
 
-        yield return dialogBox.TypeDialog($"{move.Base.Name}");
-        yield return new WaitForSeconds(0.25f);
+        yield return RunMove(playerUnit, enemyUnit, move);
 
-        playerUnit.PlayAttackAnimation();
-
-        var useMana = playerUnit.Enemy.SpendMana(move, playerUnit.Enemy);
-        yield return playerHud.UpdateMana();
-        yield return new WaitForSeconds(0.25f);
-
-        if (move.Base.Name == "Hill")
+        if(state == BattleState.PerformMove)
         {
-            var damageDetails = playerUnit.Enemy.TakeDamage(move, playerUnit.Enemy);
-            yield return playerHud.UpdateHPPlus();
-
-            if (damageDetails.Fainted)
-            {
-                yield return HandleEnemyFainted(enemyUnit);
-            }
-            else
-            {
-                StartCoroutine(EnemyMove());
-                yield return new WaitForSeconds(0.5f);
-            }
+            StartCoroutine(EnemyMove());
+            yield return new WaitForSeconds(0.2f);
         }
-        else
-        {
-            enemyUnit.PlayHitAnimation();
-            var damageDetails = enemyUnit.Enemy.TakeDamage(move, playerUnit.Enemy);
-            yield return enemyHud.UpdateHP();
-            yield return ShowDamageDetails(damageDetails);
-
-            if (damageDetails.Fainted)
-            {
-                yield return HandleEnemyFainted(enemyUnit);
-            }
-            else
-            {
-                StartCoroutine(EnemyMove());
-                yield return new WaitForSeconds(0.5f);
-            }
-        }
+        
 
     }
 
     IEnumerator EnemyMove()
     {
-        state = BattleState.EnemyMove;
+        state = BattleState.PerformMove;
 
 
         var move = enemyUnit.Enemy.GetRandomMove();
 
+        yield return RunMove(enemyUnit, playerUnit, move);
+
+        if(state == BattleState.PerformMove)
+            MoveSelection();
+    }
+
+    IEnumerator RunMove(BattleUnit sourceUnit/*공격*/, BattleUnit targetUnit/*타겟*/, Move move)
+    {
         yield return dialogBox.TypeDialog($"{move.Base.Name}");
         yield return new WaitForSeconds(0.25f);
 
-        enemyUnit.PlayAttackAnimation();
+        sourceUnit.PlayAttackAnimation();
 
-        var useMana = enemyUnit.Enemy.SpendMana(move, enemyUnit.Enemy);
-        yield return enemyHud.UpdateMana();
+        var useMana = sourceUnit.Enemy.SpendMana(move, sourceUnit.Enemy);
+        yield return sourceUnit.Hud.UpdateMana();
         yield return new WaitForSeconds(0.25f);
 
-        playerUnit.PlayHitAnimation();
-        var damageDetails = playerUnit.Enemy.TakeDamage(move, playerUnit.Enemy);
-        yield return playerHud.UpdateHP();
-        yield return ShowDamageDetails(damageDetails);
-
-        if (damageDetails.Fainted)
+        if (move.Base.Name == "Hill")
         {
-            yield return dialogBox.TypeDialog($"{playerUnit.Enemy.Base.Name} 다운");
-            playerUnit.PlayFaintAnimation();
-
-            yield return new WaitForSeconds(1f);
-            OnBattleOver(false);
+            var damageDetails = sourceUnit.Enemy.TakeDamage(move, sourceUnit.Enemy);
+            yield return sourceUnit.Hud.UpdateHPPlus();
         }
         else
         {
-            MoveSelection();
+            targetUnit.PlayHitAnimation();
+            var damageDetails = targetUnit.Enemy.TakeDamage(move, sourceUnit.Enemy);
+            yield return targetUnit.Hud.UpdateHP();
+            yield return ShowDamageDetails(damageDetails);
+
+            if (damageDetails.Fainted)
+            {
+                yield return HandleEnemyFainted(targetUnit);
+                targetUnit.PlayFaintAnimation();
+                yield return new WaitForSeconds(0.2f);
+
+                CheckForBattleOver(targetUnit);
+            }
         }
     }
+
+    void CheckForBattleOver(BattleUnit faintedUnit)
+    {
+        if (faintedUnit.IsPlayerUnit)
+        {
+            //플레이어가 죽었을 때
+            BattleOver(false);
+        }
+        else
+            BattleOver(true);
+    }
+
 
     IEnumerator HandleEnemyFainted(BattleUnit faintedUnit)
     {
@@ -199,6 +231,9 @@ public class BattleSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            var move = playerUnit.Enemy.Moves[currentMove];
+            if (move.Mana == 0) return;
+
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
             StartCoroutine(PlayerMove());

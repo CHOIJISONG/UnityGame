@@ -19,5 +19,5 @@ MonoBehaviour:
   power: 10
   accuracy: 100
   magicAttack: 0
-  mana: 0
+  mana: 1
   animaitionName: 
