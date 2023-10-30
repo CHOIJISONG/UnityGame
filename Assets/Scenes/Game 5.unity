@@ -14227,8 +14227,8 @@ Transform:
   m_GameObject: {fileID: 1202639631}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6, y: 19.6, z: 0}
-  m_LocalScale: {x: 2, y: 3, z: 1}
+  m_LocalPosition: {x: 4.8, y: 19.6, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1454035214}
@@ -15929,6 +15929,8 @@ MonoBehaviour:
   questManager: {fileID: 2075512990}
   name: {fileID: 0}
   menuSet: {fileID: 1797273587}
+  monsterKill: 0
+  finishObject: {fileID: 0}
 --- !u!4 &1353228409
 Transform:
   m_ObjectHideFlags: 0
@@ -25616,8 +25618,8 @@ Transform:
   m_GameObject: {fileID: 2081996401}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.8, y: 3.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 20, y: 3.9, z: 0}
+  m_LocalScale: {x: 1.4, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 261471318}
@@ -25662,7 +25664,7 @@ Transform:
   m_GameObject: {fileID: 2092575302}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.7, y: -0.7, z: 0}
+  m_LocalPosition: {x: 41.2, y: -1.7, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -7759,7 +7759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &336111018
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7884,12 +7884,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2617bdf39c75e59469f1380069e648c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneNames:
-  - Game 1
-  - Game 2
-  - Game 3
-  - Game 4
-  - Game 5
 --- !u!1 &347816746
 GameObject:
   m_ObjectHideFlags: 0
@@ -15948,6 +15942,8 @@ MonoBehaviour:
   questManager: {fileID: 2075512990}
   name: {fileID: 0}
   menuSet: {fileID: 1797273587}
+  monsterKill: 0
+  finishObject: {fileID: 336111017}
 --- !u!4 &1353228409
 Transform:
   m_ObjectHideFlags: 0
