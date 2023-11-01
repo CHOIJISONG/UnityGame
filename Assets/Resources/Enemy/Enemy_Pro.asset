@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Professer
   description: 
-  frontSprite: {fileID: 0}
+  frontSprite: {fileID: 21300000, guid: 96883989575ee5344b15e784729c0dc2, type: 3}
   backSprite: {fileID: 0}
   type1: 6
   type2: 1
-  maxHp: 10
+  maxHp: 90
   maxMana: 100
   attack: 1
   defense: 5
@@ -32,5 +32,9 @@ MonoBehaviour:
     level: 1
   - moveBase: {fileID: 11400000, guid: 99eaa187d8eab61439379d5074e2d3e9, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 118a20dc1d4ef56489decebac25b8901, type: 2}
+  - moveBase: {fileID: 11400000, guid: e5baf3abb5ce1c742b298240a5f9f031, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 62ab4c0f03c502045bd9030fe0e170d1, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: f3d4475b2d4e9a24cb12ecd73c1feb91, type: 2}
     level: 1

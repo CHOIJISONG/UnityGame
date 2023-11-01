@@ -193,6 +193,7 @@ public class PlayerMove : MonoBehaviour
 
         if (collider != null)
         {
+            Debug.Log("»Æ¿Œ");
             anim.SetBool("isWalking", false);
             anim.SetBool("isJumping", false);
             onEnterEnemysView?.Invoke(collider);

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6722e6b7bba72554fb1cd0896eb0ce52, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  name: Fire
+  name: "\uBD88\uAF43"
   image: {fileID: 2024927560, guid: d7aeae259b68fa34d92761088133f2e8, type: 3}
   description: 
   type: 3
   power: 12
   accuracy: 100
   magicAttack: 1
-  mana: 6
+  mana: 3
   animaitionName: 
