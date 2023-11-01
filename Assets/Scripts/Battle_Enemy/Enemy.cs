@@ -49,7 +49,7 @@ public class Enemy
                 Moves.Add(new Move(move.Base));
             }
 
-            if (Moves.Count >= 4)
+            if (Moves.Count >= 6)
             {
                 break;
             }
@@ -141,6 +141,8 @@ public class Enemy
             {
                 HP += damage;
             }
+            
+
         }
         else
         {
@@ -165,11 +167,16 @@ public class Enemy
         };
 
         Mana -= move.Mana;
+        if(move.Base.name == "Hill")
+        {
+            Mana += 7;
+        }
         if (attacker.Mana <= 0)
         {
             Mana = 0;
             updateMana.NoMana = true;
         }
+
         return updateMana;
     }
 

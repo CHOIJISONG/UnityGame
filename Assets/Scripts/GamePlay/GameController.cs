@@ -40,6 +40,13 @@ public class GameController : MonoBehaviour
                 state = GameState.CutScene;
                 StartCoroutine(enemy.TriggerEnemyBattle(playerController));
             }
+            var boss = enemyCollider.GetComponentInParent<Boss_move>();
+            if(boss != null)
+            {
+                state = GameState.CutScene;
+                StartCoroutine(boss.TriggerEnemyBattle(playerController));
+            }
+
         };
 
 
@@ -73,9 +80,21 @@ public class GameController : MonoBehaviour
         var enemyParty = enemy.GetComponent<EnemyParty>();
 
         battleSystem.StartEnemyBattle(playerParty, enemyParty);
-    } 
+    }
 
-     
+    public void StartBossBattle(Boss_move enemy)
+    {
+        state = GameState.Battle;
+        battleSystem.gameObject.SetActive(true);
+        worldCamera.gameObject.SetActive(false);
+
+        var playerParty = playerController.GetComponent<EnemyParty>();
+        var enemyParty = enemy.GetComponent<EnemyParty>();
+
+        battleSystem.StartEnemyBattle(playerParty, enemyParty);
+    }
+
+
 
 
     void EndBattle(bool won)
@@ -84,6 +103,7 @@ public class GameController : MonoBehaviour
         battleSystem.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);
     }
+    
 
     private void Update()
     {

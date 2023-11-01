@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6722e6b7bba72554fb1cd0896eb0ce52, type: 3}
   m_Name: Masic
   m_EditorClassIdentifier: 
-  name: Masic
+  name: "\uB9C8\uB098\uACF5\uACA9"
   image: {fileID: 1643860782, guid: d7aeae259b68fa34d92761088133f2e8, type: 3}
   description: 
   type: 6
   power: 20
   accuracy: 100
   magicAttack: 1
-  mana: 15
+  mana: 7
   animaitionName: 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { Start, MoveSelection, PerformMove/*EnemyMove*/, Busy , BattleOver}
 
@@ -87,6 +88,8 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.BattleOver;
         OnBattleOver(won);
+        
+
     }
 
     void MoveSelection()
@@ -143,6 +146,9 @@ public class BattleSystem : MonoBehaviour
         {
             var damageDetails = sourceUnit.Enemy.TakeDamage(move, sourceUnit.Enemy);
             yield return sourceUnit.Hud.UpdateHPPlus();
+
+            useMana = sourceUnit.Enemy.SpendMana(move, sourceUnit.Enemy);
+            yield return sourceUnit.Hud.UpdateMana();
         }
         else
         {
@@ -166,8 +172,10 @@ public class BattleSystem : MonoBehaviour
     {
         if (faintedUnit.IsPlayerUnit)
         {
-            //플레이어가 죽었을 때
             BattleOver(false);
+            //플레이어가 죽었을 때
+            SceneManager.LoadScene("Game Over");
+            
         }
         else
             BattleOver(true);
@@ -180,8 +188,6 @@ public class BattleSystem : MonoBehaviour
         faintedUnit.PlayFaintAnimation();
 
         yield return new WaitForSeconds(1f);
-
-        OnBattleOver(true);
     }
 
 

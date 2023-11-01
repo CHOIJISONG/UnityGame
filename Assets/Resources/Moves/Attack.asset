@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6722e6b7bba72554fb1cd0896eb0ce52, type: 3}
   m_Name: Attack
   m_EditorClassIdentifier: 
-  name: Attack
+  name: "\uACF5\uACA9"
   image: {fileID: 1657135502, guid: d7aeae259b68fa34d92761088133f2e8, type: 3}
   description: 
   type: 2

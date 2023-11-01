@@ -23,6 +23,7 @@ public class Enemy_move : MonoBehaviour
         Invoke("Think", 5);
     }
 
+
     
     void FixedUpdate()
     {
