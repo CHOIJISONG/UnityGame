@@ -10301,6 +10301,7 @@ MonoBehaviour:
   talkManager: {fileID: 600450846}
   talkIndex: 0
   portraitImg: {fileID: 1926974689}
+  name: {fileID: 0}
   menuSet: {fileID: 1797273587}
   monsterKill: 0
   finishObject: {fileID: 336111017}
@@ -12654,7 +12655,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -63, y: 47}
-  m_SizeDelta: {x: 40, y: 30}
+  m_SizeDelta: {x: 40, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1793683915
 Animator:
@@ -13162,8 +13163,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

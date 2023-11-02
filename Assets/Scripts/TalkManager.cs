@@ -22,7 +22,7 @@ public class TalkManager : MonoBehaviour
 
         talkData.Add(1000, new string[] { "요번에 졸업하려고 온 5학년 학생이 자네인가?:0",
                                           "졸업하기 위해서는 과제와 시험이 있다는 것은 알고 있겠지?:1" ,
-                                          "첫 번째 과제를 주겠습니다. 학교 주변에 학생들을 위협하는 슬라임 4마리좀 잡아오세요.:0",
+                                          "첫 번째 과제를 주겠습니다.!\r\n 학교 주변에 학생들을 위협하는 슬라임 4마리좀 잡아오세요.:0",
                                           "참 자동 저장 기능이 없으니깐 꼭 이동시 ESC를 눌러서 저장하기를 꼭 눌러야해!!\r\n저장한다고 해도 몬스터 처치는 카운트 안되고 위치만 저장다는거 명심해!!:1",
                                           "안누르면 너만 손해야!! 수고하라고:0"  });
 
@@ -50,8 +50,8 @@ public class TalkManager : MonoBehaviour
         portraitData.Add(3000 + 0, portraitArr[0]);
         portraitData.Add(3000 + 1, portraitArr[1]);
 
-        portraitData.Add(4000 + 0, portraitArr[0]);
-        portraitData.Add(4000 + 1, portraitArr[1]);
+        portraitData.Add(4000 + 0, portraitArr[2]);
+        portraitData.Add(4000 + 1, portraitArr[3]);
     }
 
     public string GetTalk(int id, int talkIndex)

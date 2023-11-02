@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Game 2")
         {
-            if (monsterKill >= 3)
+            if (monsterKill >= 4)
             {
 
                 finishObject.SetActive(true);
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Game 3")
         {
-            if (monsterKill >= 3)
+            if (monsterKill >= 4)
             {
 
                 finishObject.SetActive(true);
@@ -126,11 +126,25 @@ public class GameManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "Game 4")
         {
-            if (monsterKill >= 3)
+            if (monsterKill >= 5)
             {
 
                 finishObject.SetActive(true);
             }
+        }
+        else if (SceneManager.GetActiveScene().name == "Game 5")
+        {
+            if (monsterKill >= 1)
+            {
+
+                finishObject.SetActive(true);
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "Game Talk2" || SceneManager.GetActiveScene().name == "Game Talk3" || SceneManager.GetActiveScene().name == "Game Talk4")
+        {
+           
+                finishObject.SetActive(true);
+            
         }
 
 
