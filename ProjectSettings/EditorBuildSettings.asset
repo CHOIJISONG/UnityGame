@@ -13,20 +13,29 @@ EditorBuildSettings:
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Game 2.unity
-    guid: 795a3125832cc9f4089f211ba6a0f00f
+    guid: 2414223f9994cba47af4d868d4f31147
+  - enabled: 1
+    path: Assets/Scenes/Game Talk2.unity
+    guid: dab851e4e8e683f458d705146b36f464
   - enabled: 1
     path: Assets/Scenes/Game 3.unity
-    guid: 2ecb8785f0a0e56449b74c9b6abb7419
+    guid: 78afaa4e64d83bd428c0a644d7a1ea4d
+  - enabled: 1
+    path: Assets/Scenes/Game Talk3.unity
+    guid: 102f557088ae66144aeaf44aaddeb8b8
   - enabled: 1
     path: Assets/Scenes/Game 4.unity
-    guid: 27ce77a3de850ce4989840b3abcb9a2a
+    guid: 129c02bb6e128214aa30a63da659ef27
+  - enabled: 1
+    path: Assets/Scenes/Game Talk4.unity
+    guid: 1eb512ca5d4b1a34cb2d58edd953b4b3
   - enabled: 1
     path: Assets/Scenes/Game 5.unity
-    guid: b349ca6fe045cf545be2f63a5e59b4c2
-  - enabled: 1
-    path: Assets/Scenes/Game 6.unity
     guid: ea956bcd96e6ab742bc487584a03dde7
   - enabled: 1
     path: Assets/Scenes/Game Over.unity
     guid: 412b662dacb3ef540893b6e56ad03a1c
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: 248a29be05601474096e12acd7e5a10a
   m_configObjects: {}
