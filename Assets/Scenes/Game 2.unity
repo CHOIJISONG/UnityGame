@@ -11099,7 +11099,6 @@ MonoBehaviour:
   talkManager: {fileID: 600450846}
   talkIndex: 0
   portraitImg: {fileID: 1926974689}
-  questManager: {fileID: 2075512990}
   name: {fileID: 0}
   menuSet: {fileID: 1797273587}
   monsterKill: 0
@@ -15088,7 +15087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -15223,10 +15222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb579bc1f7b96314e9b53ff3cefcb24e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questId: 10
-  questActionIndex: 0
-  questObject:
-  - {fileID: 1507196671}
 --- !u!4 &2075512991
 Transform:
   m_ObjectHideFlags: 0
@@ -15339,7 +15334,7 @@ GameObject:
   - component: {fileID: 2096174102}
   m_Layer: 0
   m_Name: Finish
-  m_TagString: Finish1
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

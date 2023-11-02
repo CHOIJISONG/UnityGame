@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 165587801}
   m_Layer: 0
   m_Name: Finish
-  m_TagString: Finish3
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8261,7 +8261,6 @@ MonoBehaviour:
   talkManager: {fileID: 600450846}
   talkIndex: 0
   portraitImg: {fileID: 1926974689}
-  questManager: {fileID: 2075512990}
   name: {fileID: 0}
   menuSet: {fileID: 1797273587}
   monsterKill: 0

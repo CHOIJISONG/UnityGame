@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
+//using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -138,9 +138,25 @@ public class PlayerMove : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Finish")
+        if (collision.gameObject.tag == "Finish")
         {   // "SceneController" 스크립트의 인스턴스를 찾아서 가져옴
-            SceneManager.LoadScene("Game 2");
+            if (SceneManager.GetActiveScene().name == "Game")
+            {
+                SceneManager.LoadScene("Game 2");
+            }
+            else if (SceneManager.GetActiveScene().name == "Game 2")
+            {
+                SceneManager.LoadScene("Game Talk2");
+            }
+            else if (SceneManager.GetActiveScene().name == "Game 3")
+            {
+                SceneManager.LoadScene("Game Talk3");
+            }
+            else if (SceneManager.GetActiveScene().name == "Game 4")
+            {
+                SceneManager.LoadScene("Game Talk4");
+            }
+            // SceneManager.LoadScene("Game 2");
         }
         else if (collision.gameObject.tag == "Finish1")
         {
@@ -154,7 +170,6 @@ public class PlayerMove : MonoBehaviour
         {
             SceneManager.LoadScene("Game 5");
         }
-
     }
 
     /*

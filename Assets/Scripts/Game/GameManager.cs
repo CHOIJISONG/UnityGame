@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public Image portraitImg;
 
-    public QuestManager questManager;
+   
     public TextMeshProUGUI name;
     public GameObject menuSet;
 
@@ -67,15 +67,15 @@ public class GameManager : MonoBehaviour
     }
     void Talk(int id, bool isNpc)
     {
-        int questTalkIndex = questManager.GetQuestTalkIndex(id);
-        string talkData = talkManager.GetTalk(id + questTalkIndex, talkIndex);
+        
+        string talkData = talkManager.GetTalk(id , talkIndex);
 
         //대화 끝날 경우
         if (talkData == null)
         {
             talkIndex = 0;
             isAction = false;
-            Debug.Log(questManager.CheckQuest(id));
+           
             return;
         }
 
