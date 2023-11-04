@@ -11,6 +11,8 @@ public class BattleUnit : MonoBehaviour
     [SerializeField] bool isPlayerUnit;
     [SerializeField] BattleHud hud;
 
+    public AudioClip clip;
+
     public BattleHud Hud
     {
         get { return hud; }

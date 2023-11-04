@@ -5825,6 +5825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerUnit: 0
   hud: {fileID: 1875079447}
+  clip: {fileID: 0}
 --- !u!1 &1065573964
 GameObject:
   m_ObjectHideFlags: 0
@@ -6558,10 +6559,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e79c25871766c418834dd2fdf99cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSounds:
-  - name: Theme
-    clip: {fileID: 8300000, guid: f7c94b00546f2484ea827051a05081a4, type: 3}
-  sfxSounds: []
+  bgSound: {fileID: 0}
+  bglist: []
   musicSource: {fileID: 827397835}
   sfxSource: {fileID: 511238070}
 --- !u!4 &1226110274
@@ -7120,6 +7119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerUnit: 1
   hud: {fileID: 934422572}
+  clip: {fileID: 0}
 --- !u!1 &1323971778
 GameObject:
   m_ObjectHideFlags: 0
@@ -10371,6 +10371,7 @@ MonoBehaviour:
   gameManager: {fileID: 1353228408}
   player: {fileID: 1439453123}
   scanObject: {fileID: 0}
+  clip: {fileID: 8300000, guid: 6e36b5188acd6bc4aa9c39a07932fea8, type: 3}
   maxSpeed: 5
   jumpPower: 10
 --- !u!70 &1439453124

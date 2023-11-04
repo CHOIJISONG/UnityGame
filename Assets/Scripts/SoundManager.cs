@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
+    public AudioSource bgSound;
+    public AudioClip[] bglist;
     public static SoundManager instance;
 
-    public Sound[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
 
     private void Awake()
@@ -16,49 +18,45 @@ public class SoundManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-    private void Start()
-    {
-        PlayMusic("Theme");
+
     }
 
-    public void PlayMusic(string name)
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        Sound s = Array.Find(musicSounds, x => x.name == name);
-
-        if (s == null)
+        for (int i = 0; i < bglist.Length; i++)
         {
-            Debug.Log("Sounc Not Found");
-        }
-        else
-        {
-            musicSource.clip = s.clip;
-            musicSource.Play();
+            if (arg0.name == bglist[i].name)
+                BgSoundPlay(bglist[i]);
         }
     }
 
-    public void PlaySFX(string name)
+    public void BgSoundPlay(AudioClip clip)
     {
-        Sound s = Array.Find(sfxSounds, x => x.name == name);
+        bgSound.clip = clip;
+        bgSound.loop = true;
+        bgSound.volume = 0.1f;
+        bgSound.Play();
+    }
 
-        if (s == null)
-        {
-            Debug.Log("Sounc Not Found");
-        }
-        else
-        {
-            sfxSource.PlayOneShot(s.clip);
-        }
+    public void PlaySFX(string sfxName, AudioClip clip)
+    {
+        GameObject go = new GameObject(sfxName + "Sound");
+        AudioSource audiosource = go.AddComponent<AudioSource>();
+        audiosource.clip = clip;
+        audiosource.Play();
+
+        Destroy(go, clip.length);
     }
 
     public void ToggleMusic()
     {
-        musicSource.mute = !musicSource.mute;
+        bgSound.mute = !bgSound.mute;
     }
 
     public void ToggleSFX()
@@ -68,7 +66,7 @@ public class SoundManager : MonoBehaviour
 
     public void MusicVolume(float volume)
     {
-        musicSource.volume = volume;
+        bgSound.volume = volume;
     }
 
     public void SFXVolume(float volume)
