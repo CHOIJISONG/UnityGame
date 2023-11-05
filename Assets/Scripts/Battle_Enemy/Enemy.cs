@@ -131,7 +131,7 @@ public class Enemy
         float d = a * move.Base.Power * ((float)atk / defense) + 2;
 
         int damage = Mathf.FloorToInt(d * modifiers);
-        if (move.Base.Name == "Hill")
+        if (move.Base.Name == "È¸º¹")
         {
             if (HP + damage >= MaxHp)
             {

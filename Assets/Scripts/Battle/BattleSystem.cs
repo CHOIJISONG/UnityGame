@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum BattleState { Start, MoveSelection, PerformMove/*EnemyMove*/, Busy , BattleOver}
+public enum BattleState { Start, MoveSelection, PerformMove/*EnemyMove*/, Busy , BattleOver, BossBattleOver}
 
 public class BattleSystem : MonoBehaviour
 {
@@ -18,6 +18,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleDialogBox dialogBox;
 
     public event Action<bool> OnBattleOver;
+    public event Action<bool> OnBossBattleOver;
 
     BattleState state;
     int currentAction;
@@ -95,6 +96,8 @@ public class BattleSystem : MonoBehaviour
 
     }
 
+    
+
     void MoveSelection()
     {
         state = BattleState.MoveSelection;
@@ -145,8 +148,10 @@ public class BattleSystem : MonoBehaviour
         yield return sourceUnit.Hud.UpdateMana();
         yield return new WaitForSeconds(0.25f);
 
-        if (move.Base.Name == "Hill")
+        if (move.Base.Name == "회복")
         {
+            // 회복이 선택되었을 때
+            // 만약  -회복-  소리를 넣는다면 여기가 아닐까 싶은데 잘 모르겠다.
             var damageDetails = sourceUnit.Enemy.TakeDamage(move, sourceUnit.Enemy);
             yield return sourceUnit.Hud.UpdateHPPlus();
 
@@ -155,6 +160,8 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
+            // 회복 말고 다른 공격이 선택되었을 때
+            // 만약  -공격-  소리를 넣는다면 여기가 아닐까 싶은데 잘 모르겠다.
             targetUnit.PlayHitAnimation();
             var damageDetails = targetUnit.Enemy.TakeDamage(move, sourceUnit.Enemy);
             yield return targetUnit.Hud.UpdateHP();
@@ -163,7 +170,7 @@ public class BattleSystem : MonoBehaviour
             if (damageDetails.Fainted)
             {
                 yield return HandleEnemyFainted(targetUnit);
-                targetUnit.PlayFaintAnimation();
+                // targetUnit.PlayFaintAnimation();
                 yield return new WaitForSeconds(0.2f);
 
                 CheckForBattleOver(targetUnit);
@@ -176,18 +183,30 @@ public class BattleSystem : MonoBehaviour
         if (faintedUnit.IsPlayerUnit)
         {
             BattleOver(false);
-            //플레이어가 죽었을 때
+            // 플레이어가 죽었을 때
             SceneManager.LoadScene("Game Over");
             
         }
-        else
+        else if(faintedUnit.Enemy.Base.Name == "교수님")
+        {
+            BossBattleOver(true);
+        } else
             BattleOver(true);
+    }
+
+    void BossBattleOver(bool won)
+    {
+        state = BattleState.BossBattleOver;
+        OnBossBattleOver(won);
     }
 
 
     IEnumerator HandleEnemyFainted(BattleUnit faintedUnit)
     {
-        yield return dialogBox.TypeDialog($"{faintedUnit.Enemy.Base.Name} 처치");
+
+        yield return dialogBox.TypeDialog($"{faintedUnit.Enemy.Base.Name} 패배");
+        // 말 그대로 패배하는 곳.
+
         faintedUnit.PlayFaintAnimation();
 
         yield return new WaitForSeconds(1f);
@@ -241,11 +260,14 @@ public class BattleSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             var move = playerUnit.Enemy.Moves[currentMove];
-            if (move.Mana == 0) return;
+            // 이쪽이 공격을 선택했을 때 움직이는 곳
+
+            if (move.Mana == 0) return; // 마나가 없으면 리턴한다.
 
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
             StartCoroutine(PlayerMove());
+            // 플레이어가 움직인다.
         }
 
     }

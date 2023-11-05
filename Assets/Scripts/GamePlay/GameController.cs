@@ -3,8 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public enum GameState { FreeRoam, Battle, CutScene }
+public enum GameState { FreeRoam, Battle, CutScene , Ending}
 
 public class GameController : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class GameController : MonoBehaviour
     {
         playerController.onEncountered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
+        battleSystem.OnBossBattleOver += EndBossBattle;
 
        
 
@@ -102,6 +104,12 @@ public class GameController : MonoBehaviour
         state = GameState.FreeRoam;
         battleSystem.gameObject.SetActive(false);
         worldCamera.gameObject.SetActive(true);
+    }
+
+    void EndBossBattle(bool won)
+    {
+        state = GameState.Ending;
+        SceneManager.LoadScene("Ending");
     }
     
 
