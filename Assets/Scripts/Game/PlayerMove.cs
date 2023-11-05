@@ -49,6 +49,8 @@ public class PlayerMove : MonoBehaviour
             if (scanObject != null) //조사할게 있으면 이름출력(점프는 안됨)
             {
                 gameManager.Action(scanObject);
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isJumping", false);
                 //Debug.Log(scanObject.name);
             }
             else
