@@ -2905,7 +2905,7 @@ MonoBehaviour:
   target: {fileID: 1439453119}
   speed: 3
   center: {x: 11, y: 1}
-  size: {x: 24, y: 8}
+  size: {x: 23.5, y: 8}
 --- !u!81 &519420034
 AudioListener:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f6484ba5b7aecb4b8af9fe39669e93c, type: 3}
   m_Name: Enemy_FireGolem
   m_EditorClassIdentifier: 
-  name: FireGolem
+  name: "\uD30C\uC774\uC5B4\uACE8\uB818"
   description: 
   frontSprite: {fileID: 0}
   backSprite: {fileID: 0}

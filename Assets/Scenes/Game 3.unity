@@ -3620,7 +3620,7 @@ Animator:
   m_GameObject: {fileID: 712394383}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f0ee465a744d3a041a7212c12e4bd587, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0df4b684b10219047915d567fead6db6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5736,7 +5736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerUnit: 0
-  hud: {fileID: 0}
+  hud: {fileID: 1875079447}
   clip: {fileID: 0}
 --- !u!1 &1065573964
 GameObject:
@@ -5891,7 +5891,7 @@ Animator:
   m_GameObject: {fileID: 1086730832}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f0ee465a744d3a041a7212c12e4bd587, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0df4b684b10219047915d567fead6db6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7990,7 +7990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerUnit: 1
-  hud: {fileID: 0}
+  hud: {fileID: 934422572}
   clip: {fileID: 0}
 --- !u!1 &1339683112
 GameObject:
