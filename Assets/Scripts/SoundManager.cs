@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
 {
     public AudioSource bgSound;
     public AudioClip[] bglist;
+    public Sound[] sfxSounds;
     public static SoundManager instance;
 
     public AudioSource musicSource, sfxSource;
@@ -44,14 +45,17 @@ public class SoundManager : MonoBehaviour
         bgSound.Play();
     }
 
-    public void PlaySFX(string sfxName, AudioClip clip)
+    public void PlaySFX(string name)
     {
-        GameObject go = new GameObject(sfxName + "Sound");
-        AudioSource audiosource = go.AddComponent<AudioSource>();
-        audiosource.clip = clip;
-        audiosource.Play();
-
-        Destroy(go, clip.length);
+        Sound s = Array.Find(sfxSounds, x => x.name == name);
+        if (s == null)
+        {
+            Debug.Log("Sound Not Found");
+        }
+        else
+        {
+            sfxSource.PlayOneShot(s.clip);
+        }
     }
 
     public void ToggleMusic()

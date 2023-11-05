@@ -6824,6 +6824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgSound: {fileID: 0}
   bglist: []
+  sfxSounds: []
   musicSource: {fileID: 827397835}
   sfxSource: {fileID: 511238070}
 --- !u!4 &1226110274
