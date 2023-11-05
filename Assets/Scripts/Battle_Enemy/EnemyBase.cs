@@ -142,7 +142,7 @@ public class TypeChart
         /* Normal */ new float[] { 1f, 1f, 1f, 1f, 1f, 1f},
         /* Fire */ new float[] { 1f, 1.5f, 0.5f, 1f, 2f, 1f},
         /* Venom */ new float[] { 1f, 1.5f, 1f, 0.5f, 1f, 1f},
-        /* Ice */ new float[] { 1f, 1.5f, 2f, 1f, 1.5f, 1f},
+        /* Ice */ new float[] { 1f, 1.5f, 2f, 1f, 0.5f, 1f},
         /* Masic */ new float[] { 1f, 1f, 1f, 1f, 1f, 1.5f},
 
     };

@@ -33,7 +33,7 @@ public class MainCamera : MonoBehaviour
         float lx = size.x * 0.5f - width;
         float clampX = Mathf.Clamp(transform.position.x, -lx + center.x, lx + center.x);
 
-        float ly = size.x * 0.5f - height;
+        float ly = size.y * 0.5f - height;
         float clampY = Mathf.Clamp(transform.position.y, -ly + center.y, ly + center.y);
 
         transform.position = new Vector3(clampX, clampY, -10f);
