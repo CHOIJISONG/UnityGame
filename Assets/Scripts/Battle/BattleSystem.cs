@@ -38,9 +38,6 @@ public class BattleSystem : MonoBehaviour
         this.playerParty = playerParty;
         this.enemyParty = enemyParty;
         StartCoroutine(SetUpBattle());
-
-        SoundManager.instance.bgSound.Stop();
-        SoundManager.instance.PlaySFX("Battle");
     }
 
 
@@ -54,6 +51,8 @@ public class BattleSystem : MonoBehaviour
         enemyP = enemyParty.GetComponent<Enemy_move>();
 
         StartCoroutine(SetUpBattle());
+        SoundManager.instance.bgSound.Stop();
+        SoundManager.instance.PlaySFX("Battle");
     }
      
 
@@ -92,8 +91,8 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.BattleOver;
         OnBattleOver(won);
-        
-
+        SoundManager.instance.sfxSource.Stop();
+        SoundManager.instance.bgSound.Play();
     }
 
     
@@ -152,6 +151,7 @@ public class BattleSystem : MonoBehaviour
         {
             // 회복이 선택되었을 때
             // 만약  -회복-  소리를 넣는다면 여기가 아닐까 싶은데 잘 모르겠다.
+            SoundManager.instance.PlaySFX("Hill");
             var damageDetails = sourceUnit.Enemy.TakeDamage(move, sourceUnit.Enemy);
             yield return sourceUnit.Hud.UpdateHPPlus();
 
@@ -162,6 +162,7 @@ public class BattleSystem : MonoBehaviour
         {
             // 회복 말고 다른 공격이 선택되었을 때
             // 만약  -공격-  소리를 넣는다면 여기가 아닐까 싶은데 잘 모르겠다.
+            SoundManager.instance.PlaySFX("Attack");
             targetUnit.PlayHitAnimation();
             var damageDetails = targetUnit.Enemy.TakeDamage(move, sourceUnit.Enemy);
             yield return targetUnit.Hud.UpdateHP();

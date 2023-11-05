@@ -1682,7 +1682,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fc997f742dce5ca40ae5aec589d90ec2, type: 3}
-    m_FontSize: 45
+    m_FontSize: 37
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -3038,7 +3038,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fc997f742dce5ca40ae5aec589d90ec2, type: 3}
-    m_FontSize: 45
+    m_FontSize: 37
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -3841,6 +3841,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 6e36b5188acd6bc4aa9c39a07932fea8, type: 3}
   - name: Battle
     clip: {fileID: 8300000, guid: 51fc5b2a1e9dca74fa66fcea4419b189, type: 3}
+  - name: Attack
+    clip: {fileID: 8300000, guid: 5703d34fe0017bf4ca9e38801760d576, type: 3}
+  - name: Hill
+    clip: {fileID: 8300000, guid: e0083dc9d6481d840b56b22e4133b445, type: 3}
   musicSource: {fileID: 1528428629}
   sfxSource: {fileID: 1070194887}
 --- !u!4 &1390277547
@@ -6113,7 +6117,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fc997f742dce5ca40ae5aec589d90ec2, type: 3}
-    m_FontSize: 47
+    m_FontSize: 37
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
