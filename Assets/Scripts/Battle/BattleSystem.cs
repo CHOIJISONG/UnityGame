@@ -37,6 +37,9 @@ public class BattleSystem : MonoBehaviour
         this.playerParty = playerParty;
         this.enemyParty = enemyParty;
         StartCoroutine(SetUpBattle());
+
+        SoundManager.instance.bgSound.Stop();
+        SoundManager.instance.PlaySFX("Battle");
     }
 
 

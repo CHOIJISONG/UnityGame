@@ -1734,8 +1734,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 854948998}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3836,6 +3836,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1e1b438f4ec8b6c44b8b3272406a801f, type: 3}
   - {fileID: 8300000, guid: 35ce408210dfa9843ba14da86f8efb4e, type: 3}
   - {fileID: 8300000, guid: b9e74e6fc4c7d0e4e958996fa4e8f6bc, type: 3}
+  sfxSounds:
+  - name: JUMP
+    clip: {fileID: 8300000, guid: 6e36b5188acd6bc4aa9c39a07932fea8, type: 3}
+  - name: Battle
+    clip: {fileID: 8300000, guid: 51fc5b2a1e9dca74fa66fcea4419b189, type: 3}
   musicSource: {fileID: 1528428629}
   sfxSource: {fileID: 1070194887}
 --- !u!4 &1390277547
@@ -6952,7 +6957,7 @@ RectTransform:
   m_Father: {fileID: 1365376312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7263,14 +7268,14 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 924858268}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+      - m_Target: {fileID: 1390277546}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: SFXVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

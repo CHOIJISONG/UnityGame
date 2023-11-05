@@ -56,7 +56,7 @@ public class PlayerMove : MonoBehaviour
                 rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 anim.SetBool("isJumping", true);
 
-                SoundManager.instance.PlaySFX("JUMP", clip);
+                SoundManager.instance.PlaySFX("JUMP");
             }
 
         }
