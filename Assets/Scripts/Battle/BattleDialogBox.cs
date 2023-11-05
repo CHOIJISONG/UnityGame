@@ -51,7 +51,7 @@ public class BattleDialogBox : MonoBehaviour
             if (i == selectedMove)
                 moveTexts[i].color = highlighttedColor;
             else
-                moveTexts[i].color = Color.white;
+                moveTexts[i].color = Color.black;
         }
 
         manaText.text = $"MP : {move.Mana}";
@@ -59,7 +59,7 @@ public class BattleDialogBox : MonoBehaviour
         if (move.Mana == 0)
             manaText.color = Color.red;
         else 
-            manaText.color = Color.white;
+            manaText.color = Color.black;
     }
 
 
