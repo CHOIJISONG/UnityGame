@@ -199,6 +199,8 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.BossBattleOver;
         OnBossBattleOver(won);
+        SoundManager.instance.sfxSource.Stop();
+        SoundManager.instance.bgSound.Play();
     }
 
 

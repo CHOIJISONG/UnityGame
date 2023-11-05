@@ -51,6 +51,7 @@ public class PlayerMove : MonoBehaviour
                 gameManager.Action(scanObject);
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isJumping", false);
+                SoundManager.instance.PlaySFX("Search");
                 //Debug.Log(scanObject.name);
             }
             else
