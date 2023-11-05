@@ -7,7 +7,7 @@ using TMPro;
 public class TypingEffect : MonoBehaviour
 {
     public TMP_Text tx;
-    private string tmp_text = "그렇게 나는 무사히 졸업시험을 통과했다";
+    private string tmp_text = "그렇게 나는 무사히 시험을 통과하고 졸업을 했다.";
     void Start()
     {
         StartCoroutine(_typing());
