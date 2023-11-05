@@ -67,7 +67,7 @@ public class BattleSystem : MonoBehaviour
         var enemysEnemy = enemyParty.GetEnemy();
         enemyUnit.SetUp(enemysEnemy);
         enemyUnit.gameObject.SetActive(true);
-        yield return dialogBox.TypeDialog($"{enemysEnemy.Base.Name} 등장 ");
+        yield return dialogBox.TypeDialog($"{enemysEnemy.Base.Name} 출현 ");
         yield return new WaitForSeconds(1f);
 
         /*--------------------------------------------------------------------*/
@@ -95,7 +95,7 @@ public class BattleSystem : MonoBehaviour
     void MoveSelection()
     {
         state = BattleState.MoveSelection;
-        StartCoroutine(dialogBox.TypeDialog("액션 선택"));
+        StartCoroutine(dialogBox.TypeDialog("스킬 선택"));
         dialogBox.EnableDialogText(true);
         dialogBox.EnableMoveSelector(true);
 
@@ -109,7 +109,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return RunMove(playerUnit, enemyUnit, move);
 
-        if(state == BattleState.PerformMove)
+        if (state == BattleState.PerformMove)
         {
             StartCoroutine(EnemyMove());
             yield return new WaitForSeconds(0.2f);
@@ -127,7 +127,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return RunMove(enemyUnit, playerUnit, move);
 
-        if(state == BattleState.PerformMove)
+        if (state == BattleState.PerformMove)
             MoveSelection();
     }
 
@@ -184,7 +184,7 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator HandleEnemyFainted(BattleUnit faintedUnit)
     {
-        yield return dialogBox.TypeDialog($"{faintedUnit.Enemy.Base.Name} 다운");
+        yield return dialogBox.TypeDialog($"{faintedUnit.Enemy.Base.Name} 처치");
         faintedUnit.PlayFaintAnimation();
 
         yield return new WaitForSeconds(1f);

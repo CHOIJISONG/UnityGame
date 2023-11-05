@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour
     int direction;
     float detect_range = 1.5f;
 
+    public AudioClip clip;
+
     public float maxSpeed;
     public float jumpPower;
     Rigidbody2D rigid;
@@ -53,6 +55,8 @@ public class PlayerMove : MonoBehaviour
             { //아니면 점프
                 rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 anim.SetBool("isJumping", true);
+
+                SoundManager.instance.PlaySFX("JUMP", clip);
             }
 
         }
